@@ -3,7 +3,7 @@
     <li :class="{ completed: isCompleted }" @click="toggleComplete(taskId)">
       {{ taskName }} {{ taskDueDate }}
     </li>
-    <button @click="deleteTask">Remove</button>
+    <button @click="deleteTask(taskId)">Remove</button>
   </div>
 </template>
 

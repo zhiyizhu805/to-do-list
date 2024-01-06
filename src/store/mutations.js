@@ -3,6 +3,7 @@ export default {
         state.tasks.push(payload);
     },
     deleteTask(state, payload) {
+        console.log(payload.taskId)
         const taskIndex = state.tasks.findIndex(task => task.taskId === payload.taskId);
         state.tasks.splice(taskIndex, 1);
     },
