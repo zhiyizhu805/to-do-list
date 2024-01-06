@@ -7,9 +7,9 @@ import getters from './getters';
 const store = createStore({
     state() {
         return {
-            events:[{taskName:"Learn Vue",isCompleted:false},
-            {taskName:"Learn React",isCompleted:false},
-            {taskName:"Learn JavaScript",isCompleted:false},
+            tasks:[{taskId:'t1',taskName:"Learn Vue",isCompleted:false},
+            {taskId:'t2',taskName:"Learn React",isCompleted:true},
+            {taskId:'t3',taskName:"Learn JavaScript",isCompleted:true},
             ]
         }
     },

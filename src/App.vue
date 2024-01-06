@@ -3,15 +3,29 @@
   <input type="text" placeholder="New Task" />
   <button>Add</button>
   <ul>
-    <li>Task 1 <button>Remove</button></li>
-    <li>Task 2 <button>Remove</button></li>
-    <li>Task 3 <button>Remove</button></li>
+    <event-list-item
+      v-for="task in AllTasks"
+      :key="task.taskId"
+      :taskId="task.taskId"
+      :taskName="task.taskName"
+      :isCompleted="task.isCompleted"
+    ></event-list-item>
   </ul>
   <button>Clear Completed</button>
   <button>Clear All</button>
   <p>Pening Task:</p>
 </template>
 
-<script></script>
-
-<style></style>
+<script>
+import EventListItem from "./components/TaskListItem.vue";
+export default {
+  components: {
+    EventListItem,
+  },
+  computed: {
+    AllTasks() {
+      return this.$store.getters.AllTasks;
+    },
+  },
+};
+</script>
