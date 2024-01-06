@@ -35,12 +35,12 @@ a {
   text-decoration: none;
   padding: 0.75rem 1.5rem;
   font: inherit;
-  background-color: #3a0061;
-  border: 1px solid #3a0061;
-  color: white;
+  border: 2px solid #f72585;
+  color: #f72585;
   cursor: pointer;
   margin-right: 0.5rem;
   display: inline-block;
+  background-color: white;
 }
 
 a:hover,

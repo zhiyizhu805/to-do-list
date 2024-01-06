@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style scoped>
-
+section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
 
 </style>
