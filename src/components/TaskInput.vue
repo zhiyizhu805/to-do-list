@@ -92,4 +92,14 @@ form {
 .form-input {
   width:100%;
 }
+
+section {
+  margin-bottom: 2rem;
+}
+
+p{
+  color: red;
+  font-size: 0.8rem;
+  margin: 0.5rem;
+}
 </style>

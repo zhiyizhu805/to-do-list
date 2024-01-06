@@ -1,14 +1,16 @@
 <template>
-  <ul>
-    <task-list-item
-      v-for="task in allTasks"
-      :key="task.taskId"
-      :taskId="task.taskId"
-      :taskName="task.taskName"
-      :taskDueDate="task.taskDueDate"
-      :isCompleted="task.isCompleted"
-    ></task-list-item>
-  </ul>
+  <section>
+    <ul>
+      <task-list-item
+        v-for="task in allTasks"
+        :key="task.taskId"
+        :taskId="task.taskId"
+        :taskName="task.taskName"
+        :taskDueDate="task.taskDueDate"
+        :isCompleted="task.isCompleted"
+      ></task-list-item>
+    </ul>
+  </section>
 </template>
 
 <script>
@@ -21,3 +23,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+section {
+  margin-bottom: 4rem;
+}
+</style>

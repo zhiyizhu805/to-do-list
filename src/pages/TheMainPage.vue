@@ -4,9 +4,9 @@
     <task-input></task-input>
     <task-filter @change-option="sortOption = $event"></task-filter>
     <task-list :allTasks="sortedTasks()"></task-list>
-    <base-button @click="deleteCompletedTasks">Clear Completed</base-button>
-    <base-button @click="deleteAllTasks">Clear All</base-button>
+    <task-management></task-management>
     <p>Pening Task:{{ pendingTasksNumber }}</p>
+    <p>Task Completion Rate: {{ completionRate }}%</p>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ import TaskListHeader from "../components/TaskListHeader.vue";
 import TaskList from "../components/TaskList.vue";
 import TaskInput from "../components/TaskInput.vue";
 import TaskFilter from "../components/TaskFilter.vue";
+import TaskManagement from "../components/TaskManagement.vue";
 export default {
   data() {
     return {
@@ -25,7 +26,8 @@ export default {
     TaskList,
     TaskInput,
     TaskFilter,
-    TaskListHeader
+    TaskListHeader,
+    TaskManagement,
   },
   computed: {
     allTasks() {
@@ -34,14 +36,15 @@ export default {
     pendingTasksNumber() {
       return this.allTasks.filter((task) => !task.isCompleted).length;
     },
+    completionRate() {
+      return Math.round(
+        (this.allTasks.filter((task) => task.isCompleted).length /
+          this.allTasks.length) *
+          100
+      );
+    },
   },
   methods: {
-    deleteCompletedTasks() {
-      this.$store.dispatch("deleteCompletedTasks");
-    },
-    deleteAllTasks() {
-      this.$store.dispatch("deleteAllTasks");
-    },
     sortedTasks() {
       switch (this.sortOption) {
         case "sortByName":
@@ -65,7 +68,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 div {
