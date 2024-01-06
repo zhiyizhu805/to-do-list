@@ -8,7 +8,7 @@
       <span>{{ taskName }}</span
       ><span> {{ taskDueDate }}</span>
     </li>
-      <button @click="deleteTask(taskId)"><ph-trash :size="32" /></button>
+      <base-button class="flat" @click="deleteTask(taskId)"><ph-trash :size="32" /></base-button>
   </div>
 </template>
 
@@ -39,10 +39,12 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 div {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 </style>
