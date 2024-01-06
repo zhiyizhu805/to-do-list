@@ -1,12 +1,7 @@
 <template>
   <h1>To DO LIST</h1>
   <task-input></task-input>
-  <select v-model="sortOption">
-    <option value="sortByName">Sort By Name</option>
-    <option value="sortByDateAsc">Sort By Date Ascending</option>
-    <option value="sortByDateDesc">Sort By Date Descending</option>
-    <option value="sortByCompleted">Sort By Completed</option>
-  </select>
+  <task-filter @change-option="sortOption = $event"></task-filter>
   <task-list :allTasks="sortedTasks()"></task-list>
   <button @click="deleteCompletedTasks">Clear Completed</button>
   <button @click="deleteAllTasks">Clear All</button>
@@ -16,6 +11,7 @@
 <script>
 import TaskList from "./components/TaskList.vue";
 import TaskInput from "./components/TaskInput.vue";
+import TaskFilter from "./components/TaskFilter.vue";
 export default {
   data() {
     return {
@@ -25,6 +21,7 @@ export default {
   components: {
     TaskList,
     TaskInput,
+    TaskFilter
   },
   computed: {
     allTasks() {
