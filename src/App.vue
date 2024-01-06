@@ -1,7 +1,7 @@
 <template>
   <h1>To DO LIST</h1>
   <task-input></task-input>
-  <task-list :AllTasks=AllTasks></task-list>
+  <task-list :allTasks=allTasks></task-list>
   <button @click="deleteCompletedTasks">Clear Completed</button>
   <button @click="deleteAllTasks">Clear All</button>
   <p>Pening Task:</p>
@@ -16,9 +16,10 @@ export default {
     TaskInput
   },
   computed: {
-    AllTasks() {
+    allTasks() {
       return this.$store.getters.AllTasks;
     },
+
 },
 methods: {
   deleteCompletedTasks() {

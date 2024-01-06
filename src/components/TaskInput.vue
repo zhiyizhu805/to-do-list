@@ -24,6 +24,8 @@ export default {
         taskDueDate: this.taskDueDate,
         isCompleted: false,
       });
+        this.taskName = "";
+        this.taskDueDate = null;
     },
   },
 };

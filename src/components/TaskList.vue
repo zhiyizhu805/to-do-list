@@ -1,7 +1,7 @@
 <template>
   <ul>
     <task-list-item
-      v-for="task in AllTasks"
+      v-for="task in allTasks"
       :key="task.taskId"
       :taskId="task.taskId"
       :taskName="task.taskName"
@@ -15,7 +15,7 @@
 import TaskListItem from "./TaskListItem.vue";
 
 export default {
-  props: ["AllTasks"],
+  props: ["allTasks"],
   components: {
     TaskListItem,
   },
