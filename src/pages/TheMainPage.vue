@@ -5,8 +5,7 @@
     <task-filter @change-option="sortOption = $event"></task-filter>
     <task-list :allTasks="sortedTasks()"></task-list>
     <task-management></task-management>
-    <p>Pening Task:{{ pendingTasksNumber }}</p>
-    <p>Task Completion Rate: {{ completionRate }}%</p>
+    <task-list-footer :pendingTasksNumber="pendingTasksNumber" :completionRate="completionRate" ></task-list-footer>
   </div>
 </template>
 
@@ -16,6 +15,7 @@ import TaskList from "../components/TaskList.vue";
 import TaskInput from "../components/TaskInput.vue";
 import TaskFilter from "../components/TaskFilter.vue";
 import TaskManagement from "../components/TaskManagement.vue";
+import TaskListFooter from "../components/TaskListFooter.vue";
 export default {
   data() {
     return {
@@ -28,6 +28,7 @@ export default {
     TaskFilter,
     TaskListHeader,
     TaskManagement,
+    TaskListFooter
   },
   computed: {
     allTasks() {
