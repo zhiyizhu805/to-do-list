@@ -5,6 +5,7 @@
       :key="task.taskId"
       :taskId="task.taskId"
       :taskName="task.taskName"
+      :taskDueDate="task.taskDueDate"
       :isCompleted="task.isCompleted"
     ></task-list-item>
   </ul>
@@ -14,13 +15,9 @@
 import TaskListItem from "./TaskListItem.vue";
 
 export default {
+  props: ["AllTasks"],
   components: {
     TaskListItem,
-  },
-  computed: {
-    AllTasks() {
-      return this.$store.getters.AllTasks;
-    },
   },
 };
 </script>
