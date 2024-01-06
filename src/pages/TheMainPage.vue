@@ -1,11 +1,20 @@
 <template>
-  <div>
+  <button @click="downlownPDF">Download PDF</button>
+  <div id="toDoList">
     <task-list-header></task-list-header>
     <task-input></task-input>
-    <task-filter @change-option="sortOption = $event"></task-filter>
-    <task-list :allTasks="sortedTasks()"></task-list>
-    <task-management></task-management>
-    <task-list-footer :pendingTasksNumber="pendingTasksNumber" :completionRate="completionRate" ></task-list-footer>
+    <task-filter
+      v-if="hasTasks"
+      @change-option="sortOption = $event"
+    ></task-filter>
+    <task-list v-if="hasTasks" :allTasks="sortedTasks()"></task-list>
+    <empty-task v-if="!hasTasks"></empty-task>
+    <task-management v-if="hasTasks"></task-management>
+    <task-list-footer
+      v-if="hasTasks"
+      :pendingTasksNumber="pendingTasksNumber"
+      :completionRate="completionRate"
+    ></task-list-footer>
   </div>
 </template>
 
@@ -16,6 +25,10 @@ import TaskInput from "../components/TaskInput.vue";
 import TaskFilter from "../components/TaskFilter.vue";
 import TaskManagement from "../components/TaskManagement.vue";
 import TaskListFooter from "../components/TaskListFooter.vue";
+import EmptyTask from "../components/EmptyTask.vue";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 export default {
   data() {
     return {
@@ -28,7 +41,8 @@ export default {
     TaskFilter,
     TaskListHeader,
     TaskManagement,
-    TaskListFooter
+    TaskListFooter,
+    EmptyTask,
   },
   computed: {
     allTasks() {
@@ -38,11 +52,16 @@ export default {
       return this.allTasks.filter((task) => !task.isCompleted).length;
     },
     completionRate() {
-      return Math.round(
-        (this.allTasks.filter((task) => task.isCompleted).length /
-          this.allTasks.length) *
-          100
-      );
+      return this.allTasks.length === 0
+        ? 0
+        : Math.round(
+            (this.allTasks.filter((task) => task.isCompleted).length /
+              this.allTasks.length) *
+              100
+          );
+    },
+    hasTasks() {
+      return this.allTasks.length > 0;
     },
   },
   methods: {
@@ -66,6 +85,42 @@ export default {
           });
       }
     },
+    downlownPDF() {
+      const div = document.getElementById("toDoList");
+      html2canvas(div).then((canvas) => {
+        // Convert the canvas to an image data URL
+        const imgData = canvas.toDataURL("image/png");
+
+        // Create a new jsPDF instance with a standard A4 page size
+        const pdf = new jsPDF("p", "pt", "a4");
+
+        // Define margins (you can adjust these values)
+        const margin = 20; // Example margin of 20 points
+
+        // Calculate the size of the image to fit within the margins
+        const pdfWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
+        const pdfHeight = pdf.internal.pageSize.getHeight() - 2 * margin;
+        let imgWidth = canvas.width;
+        let imgHeight = canvas.height;
+
+        // Adjust the image size to maintain the aspect ratio
+        if (imgWidth > pdfWidth || imgHeight > pdfHeight) {
+          const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+          imgWidth = imgWidth * ratio;
+          imgHeight = imgHeight * ratio;
+        }
+
+        // Calculate the position to center the image within the margins
+        const x = margin + (pdfWidth - imgWidth) / 2;
+        const y = margin + (pdfHeight - imgHeight) / 2;
+
+        // Add the image to the PDF at the calculated position
+        pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+
+        // Save the PDF
+        pdf.save("download.pdf");
+      });
+    },
   },
 };
 </script>
@@ -80,5 +135,6 @@ div {
   border: 5px solid #7678ed;
   background-color: white;
   margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 </style>

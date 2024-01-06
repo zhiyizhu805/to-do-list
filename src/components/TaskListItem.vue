@@ -5,7 +5,7 @@
         :size="32"
         v-else
       />
-      <span>{{ taskName }}</span
+      <span class="task-name">{{ taskName }}</span
       ><span> {{ taskDueDate }}</span>
     </li>
       <base-button class="flat" @click="deleteTask(taskId)"><ph-trash :size="32" /></base-button>
@@ -36,6 +36,7 @@ button {
   cursor: pointer;
 }
 li {
+  width: 70%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,6 +46,9 @@ div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
+.task-name {
+  width: 50%;
+}
+
 </style>

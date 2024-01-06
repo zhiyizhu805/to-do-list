@@ -25,4 +25,9 @@ body {
 
 }
 
+*:focus {
+  background-color:  #f8e8f5;
+  outline: none;
+  outline-offset: 2px; /* 轮廓偏移 */
+}
 </style>
